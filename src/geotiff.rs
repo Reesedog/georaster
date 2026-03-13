@@ -157,7 +157,7 @@ impl<R: Read + Seek + Send> GeoTiffReader<R> {
     /// use georaster::geotiff::GeoTiffReader;
     ///
     /// let img_file = BufReader::new(File::open("data/tiff/utm.tif").unwrap());
-    /// let mut tiff = GeoTiffReader::open(img_file).unwrap();
+    /// let tiff = GeoTiffReader::open(img_file).unwrap();
     ///
     /// let value = tiff.read_pixel(0, 0);
     /// ```
@@ -186,7 +186,7 @@ impl<R: Read + Seek + Send> GeoTiffReader<R> {
     /// use georaster::{Coordinate, geotiff::GeoTiffReader};
     ///
     /// let img_file = BufReader::new(File::open("data/tiff/utm.tif").unwrap());
-    /// let mut tiff = GeoTiffReader::open(img_file).unwrap();
+    /// let tiff = GeoTiffReader::open(img_file).unwrap();
     ///
     /// let location = Coordinate { x: 0.0, y: 0.0 };
     /// let value = tiff.read_pixel_at_location(location);

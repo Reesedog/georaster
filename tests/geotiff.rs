@@ -502,6 +502,25 @@ fn read_coord() {
 }
 
 #[test]
+fn read_pixel_without_mutability() {
+    let img_file = BufReader::new(File::open("data/tiff/byte.tif").expect("Open image file"));
+    let tiff = GeoTiffReader::open(img_file).expect("Open Tiff");
+    let reader = &tiff;
+
+    let location = Coordinate {
+        x: 440720.0,
+        y: 3751320.0,
+    };
+
+    // convert -quiet data/tiff/byte.tif[0] -crop 1x1+0+0 txt:
+    assert_eq!(reader.read_pixel(0, 0), RasterValue::U8(107));
+    assert_eq!(
+        reader.read_pixel_at_location(location),
+        RasterValue::U8(107)
+    );
+}
+
+#[test]
 fn convert_pixel_coordinates() {
     let img_file =
         BufReader::new(File::open("data/tiff/small_world.tif").expect("Open image file"));
